@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<body>
+  <div class="col-12 grid-margin" th:fragment="header-orders">
+	<div class="card card-statistics">
+	  <div class="card-body p-0">
+		<div class="row">
+		  <div class="col-md-6 col-lg-3">
+			<div class="d-flex justify-content-between border-right card-statistics-item">
+			  <div>
+				<h1 th:utext="${codeCompany}"></h1>
+				<p class="text-muted mb-0"></p>
+			  </div>
+
+			  <i class="fa fa-building text-primary icon-lg"></i>
+			</div>
+		  </div>
+
+		  <div class="col-md-6 col-lg-3">
+			<div class="d-flex justify-content-between border-right card-statistics-item">
+			  <div>
+				<h1 th:if="${listOrder != {null}}" th:utext="${#aggregates.sum(listOrder.![qtyMoto])}"></h1>
+				<h1 th:unless="${listOrder != {null}}" th:utext="0"></h1>
+				<p class="text-muted mb-0"></p>
+			  </div>
+
+			  <i class="fa fa-motorcycle text-primary icon-lg"></i>
+			</div>
+		  </div>
+
+		  <div class="col-md-6 col-lg-3">
+			<div class="d-flex justify-content-between border-right card-statistics-item">
+			  <div>
+				<h1 th:if="${listOrder != {null}}" th:utext="${#aggregates.sum(listOrder.![qtyCar])}"></h1>
+				<h1 th:unless="${listOrder != {null}}" th:utext="0"></h1>
+				<p class="text-muted mb-0"></p>
+			  </div>
+
+			  <i class="fa fa-car text-primary icon-lg"></i>
+			</div>
+		  </div>
+
+		  <div class="col-md-6 col-lg-3">
+			<div class="d-flex justify-content-center card-statistics-item">
+			  <div class="pt-2">
+				<button type="button" class="btn btn-primary btn-rounded btn-fw" data-toggle="modal" data-target="#createBarcodeModal">
+				  <i class="fa fa-plus-circle"></i> BARCODE
+				</button>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+  </div>
+
+  <div class="col-lg-12" th:fragment="add-codes">
+	<div class="card">	<!--  px-2 -->
+	  <div class="card-body">
+		<form th:action="@{/add-codes}" th:object="${code}" method="post"> 
+		  <div class="container-fluid">
+			<span><b>ADD CODES</b></span>
+
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		  </div>
+
+		  <div class="pt-3"><hr /></div>
+
+		  <div class="container-fluid d-flex justify-content-between">
+			<div class="col-lg-3 pl-0">
+			  <p class="mt-2 mb-2">Brand code: <b><span th:utext="${codeCompany}"></span></b></p>
+			</div>
+
+			<div class="col-lg-3 pr-0">
+			  <p class="mt-2 mb-2 text-right">Date: <span th:utext="${#dates.format(#dates.createNow(),'YYYY/MM/dd')}"></span></p>
+			</div>
+		  </div>
+
+		  <div class="container-fluid mt-2 d-flex justify-content-center w-100">
+			<div class="table-responsive w-100">
+			  <table class="table">
+				<thead>
+				  <tr class="bg-light">
+					<th style="width: 10%;"></th>
+					<th style="width: 70%;">Description</th>
+					<th style="width: 20%; text-align: center;">Quantily</th>
+				  </tr>
+				</thead>
+
+				<tbody>
+				  <tr>
+					<td>1</td>
+					<td>Barcode Moto</td>
+					<td class="form-group">
+					  <input th:field="*{qtyMoto}" class="form-control text-center" style="border-bottom: 1px solid #DDDDDD;" data-inputmask="'alias': 'integer'" required />
+					</td>
+				  </tr>
+
+				  <tr>
+					<td>2</td>
+					<td>Barcode Car</td>
+					<td class="form-group">
+					  <input th:field="*{qtyCar}" class="form-control text-center" style="border-bottom: 1px solid #DDDDDD;" data-inputmask="'alias': 'integer'" required />
+					</td>
+				  </tr>
+				</tbody>
+			  </table>
+			</div>
+		  </div>
+
+		  <div class="container-fluid w-100">
+			<!-- <a href="#" class="btn btn-primary float-right mt-4 ml-2"><i class="icon-printer mr-1"></i>Print</a> -->
+			<input type="submit" class="btn btn-success float-right mt-4" value="Add codes" />
+		  </div>
+		</form>
+	  </div>
+	</div>
+  </div>
+</body>
+</html>

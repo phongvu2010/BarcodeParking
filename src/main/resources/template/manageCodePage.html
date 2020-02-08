@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="partials/header :: header-css" />
+<body>
+  <div class="container-scroller">
+	<!-- partial:../../partials/_horizontal-navbar.html -->
+	<div th:replace="partials/header :: navbar"></div>
+
+	<div class="container-fluid page-body-wrapper">
+	  <div class="main-panel">
+		<!-- content -->
+		<div class="content-wrapper">
+		  <div class="row">
+			<div class="col-lg-12 grid-margin stretch-card">
+			  <div class="card">
+				<div class="card-body">
+				  <div class="col-m-12 col-lg-5">
+					<form th:action="@{/search-code}" id="signupForm" method="post">	<!-- th:object="${find}"  -->
+					  <div class="form-group row">
+						<div class="col-4">
+						  <label>Brand</label>
+						</div>  
+						<div class="col-6">
+						  <select class="form-control">	<!-- id="exampleSelectGender" -->
+							<option value="*">All</option>
+							<option value="AA">Female</option>
+						  </select>
+						</div>
+					  </div>
+					</form>
+				  </div>
+
+				  <div class="table-responsive">
+					<table id="order-listing" class="table table-hover" style="text-align: center;">
+					  <thead>
+						<tr>
+						  <th>ID</th>
+						  <th>Type</th>
+						  <th>Code</th>
+						  <th>Create</th>
+						  <th>Export</th>
+						  <th>Expiry</th>
+						  <th>Used</th>
+						  <th>Status</th>
+						</tr>
+					  </thead>
+
+					  <tbody>
+						<tr th:if="${listCode != {null}}" th:each="code : ${listCode}"> <!--  + ${#dates.format(object.date,'yyMMdd')} -->
+						  <td>
+							<div class="form-check">
+							  <label class="form-check-label">
+								<input type="checkbox" class="form-check-input" th:value="${code.iD}" />
+								<i class="input-helper"></i>
+								<span th:utext="${#numbers.formatDecimal(code.iD,6,0)}"></span>
+							  </label>
+							</div>
+						  </td>
+						  <td>
+							 <span th:if="${code.type == 'M'}">Moto</span>
+							 <span th:unless="${code.type == 'M'}">Car</span>
+						  </td>
+						  <td th:utext="${code.code}"></td>
+						  <td th:utext="${#dates.format(code.createdDate,'dd-MM-yyyy HH:mm')}"></td>
+						  <td th:utext="${#dates.format(code.exportDate,'dd-MM-yyyy HH:mm')}"></td>
+						  <td th:utext="${#dates.format(code.expiryDate,'dd-MM-yyyy HH:mm')}"></td>
+						  <td th:utext="${#dates.format(code.usedDate,'dd-MM-yyyy HH:mm')}"></td>
+						  <td>
+							<label th:if="${code.usedDate != Null}" class="badge badge-danger" style="width: 100px;">Used</label>
+							<span th:unless="${code.usedDate != Null}" class="badge">
+							  <label th:if="${code.expiryDate < #dates.createNow() && code.expiryDate != Null}" class="badge badge-warning" style="width: 100px;">Expiry</label>
+							  <label th:unless="${code.expiryDate < #dates.createNow() && code.expiryDate != Null}" class="badge badge-success" style="width: 100px;">New</label>
+							</span>
+						  </td>
+						</tr>
+					  </tbody>
+					</table>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</div>
+
+		<!-- partial:../../partials/_footer.html -->
+		<div th:replace="partials/footer :: footer"></div>
+	  </div> <!-- main-panel ends -->
+	</div> <!-- page-body-wrapper ends -->
+  </div> <!-- container-scroller -->
+
+  <script th:src="@{vendors/js/vendor.bundle.base.js}"></script>
+  <script th:src="@{vendors/js/vendor.bundle.addons.js}"></script>
+
+  <script th:src="@{js/template.js}"></script>
+  <script th:src="@{js/data-table.js}"></script>
+</body>
+</html>

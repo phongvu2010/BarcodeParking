@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="partials/header :: header-css" />
+<body>
+  <div class="container-scroller">
+	<!-- partial:../../partials/_horizontal-navbar.html -->
+	<div th:replace="partials/header :: navbar"></div>
+
+	<div class="container-fluid page-body-wrapper">
+	  <div class="main-panel">
+		<!-- content -->
+		<div class="content-wrapper">
+		  
+		  <div class="row">
+			<!-- Narbar -->
+			<div th:replace="partials/topBarCode :: header-orders"></div>
+
+			<!-- Modal create new barcode -->
+			<div class="modal fade" id="createBarcodeModal">
+			  <div class="modal-dialog modal-lg-custom" role="document">
+				<div class="modal-content">
+				  <div class="modal-body">
+					<div th:replace="partials/topBarCode :: add-codes"></div>
+				  </div>
+				</div>
+			  </div>
+			</div> <!-- Modal create new barcode ends -->
+
+			<!-- Form list order barcode -->
+			<div class="col-lg-12 grid-margin stretch-card">
+			  <div class="card">
+				<div class="card-body">
+				  <div class="table-responsive">
+					<table id="order-listing" class="table table-hover" style="text-align: center;">
+					  <thead>
+						<tr>
+						  <th>Date</th>
+						  <th>Code Moto</th>
+						  <th>Used</th>
+						  <th>Code Car</th>
+						  <th>Used</th>
+						  <th></th>
+						</tr>
+					  </thead>
+
+					  <tbody>
+						<tr th:if="${listOrder != {null}}" th:each="object : ${listOrder}">
+						  <td th:utext="${#dates.format(object.date,'YYYY/MM/dd')}"></td>
+						  <td th:utext="${object.qtyMoto}"></td>
+						  <td th:utext="${object.usedMoto}"></td>
+						  <td th:utext="${object.qtyCar}"></td>
+						  <td th:utext="${object.usedCar}"></td>
+						  <td>
+							<a th:href="@{'list-code?d=' + ${#dates.format(object.date,'yyMMdd')}}" class="text-icons" title="View codes">
+							  <i class="fa fa-folder-o"></i>
+							</a>
+							&emsp;
+							<a th:href="@{'export-codes?d=' + ${#dates.format(object.date,'yyMMdd')}}" target="_app" th:onclick="@{window.open('export-code?d=' + ${#dates.format(object.date,'yyMMdd')},'_app','width=850,height=668'); return false;}" class="text-icons" title="Print codes" style="float: right;">
+							  <i class="fa fa-print"></i>
+							</a>
+						  </td>
+						</tr>
+					  </tbody>
+					</table>
+				  </div>
+				</div>
+			  </div>
+			</div> <!-- Form list order barcode ends -->
+		  </div>
+		  
+		</div>
+
+		<!-- partial:../../partials/_footer.html -->
+		<div th:replace="partials/footer :: footer"></div>
+	  </div> <!-- main-panel ends -->
+	</div> <!-- page-body-wrapper ends -->
+  </div> <!-- container-scroller -->
+
+  <script th:src="@{vendors/js/vendor.bundle.base.js}"></script>
+  <script th:src="@{vendors/js/vendor.bundle.addons.js}"></script>
+
+  <script th:src="@{js/template.js}"></script>
+  <script th:src="@{js/data-table.js}"></script>
+</body>
+</html>

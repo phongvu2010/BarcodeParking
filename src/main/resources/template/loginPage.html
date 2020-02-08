@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:fragment="header-css">
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title th:utext="${title}"></title>
+
+  <link rel="stylesheet" th:href="@{vendors/iconfonts/simple-line-icon/css/simple-line-icons.css}" />
+  <link rel="stylesheet" th:href="@{vendors/iconfonts/font-awesome/css/font-awesome.min.css}" />
+  <link rel="stylesheet" th:href="@{vendors/css/vendor.bundle.base.css}" />
+  <link rel="stylesheet" th:href="@{vendors/css/vendor.bundle.addons.css}" />
+
+  <link rel="stylesheet" th:href="@{css/style.css}" />
+
+  <link rel="shortcut icon" th:href="@{images/favicon.ico}" />
+</head>
+<body>
+  <div class="container-scroller">
+	<div class="container-fluid page-body-wrapper full-page-wrapper">
+	  <div class="content-wrapper d-flex align-items-center auth auth-bg-1 theme-one">
+		<div class="row w-100 mx-auto">
+		  <div class="col-lg-4 mx-auto">
+			<div class="auto-form-wrapper">
+			  <form th:action="@{/j_spring_security_check}" method="post">
+				<div style="text-align: center; padding-bottom: 30px;">
+				  <img th:src="@{images/van-hanh-mall-logo.png}" alt="logo" />
+				</div>
+
+				<div th:if="${param.error}">
+				  <p style="color: red; text-align: center;">Invalid username or password</p>
+				</div>
+
+				<div th:if="${param.logout}">
+				  <p style="color: green; text-align: center;">You have been logged out</p>
+				</div>
+
+				<div th:if="${param.success}">
+				  <p style="color: green; text-align: center;" th:text="${param.success}"></p>
+				</div>
+
+				<div class="form-group">
+				  <!-- <label class="label">Username</label> -->
+				  <div class="input-group">
+					<input type="text" class="form-control" name="username" placeholder="Username" />
+				  </div>
+				</div>
+
+				<div class="form-group">
+				  <!-- <label class="label">Password</label> -->
+				  <div class="input-group">
+					<input type="password" class="form-control" name="password" placeholder="Password" />
+				  </div>
+				</div>
+
+				<div class="form-group">
+				  <button class="btn btn-primary submit-btn btn-block">Login</button>
+				</div>
+
+				<div class="form-group d-flex justify-content-between">
+				  <div class="form-check form-check-flat mt-0">
+					<label class="form-check-label">
+					  <input type="checkbox" class="form-check-input" name="remember-me" checked />
+					  Keep me signed in
+					</label>
+				  </div>
+
+				  <a href="/forgot-password" class="text-small forgot-password text-black">Forgot Password</a>
+				</div>
+			  </form>
+			</div>
+
+			<p class="footer-text text-center" style="padding-top: 15px;">
+			  Copyright &#169; 2019 <a href="http://vanhanhmall.com/" target="_blank">Van Hanh Mall</a>. All rights reserved.
+			</p>
+		  </div>
+		</div>
+	  </div> <!-- content-wrapper ends -->
+	</div> <!-- page-body-wrapper ends -->
+  </div> <!-- container-scroller -->
+
+  <script th:src="@{vendors/js/vendor.bundle.base.js}"></script>
+  <script th:src="@{vendors/js/vendor.bundle.addons.js}"></script>
+
+  <script th:src="@{js/template.js}"></script>
+</body>
+</html>
