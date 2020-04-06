@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="loginPage :: header-css" />
+<body>
+  <div class="container-scroller">
+	<div class="container-fluid page-body-wrapper full-page-wrapper">
+	  <div class="content-wrapper d-flex align-items-center auth auth-bg-1 theme-one">
+		<div class="row w-100 mx-auto">
+		  <div class="col-lg-4 mx-auto">
+			<div class="auto-form-wrapper">
+			  <form th:action="@{/forgot-password}" method="post">
+				<div style="text-align: center; padding-bottom: 30px;">
+				  <img th:src="@{images/van-hanh-mall-logo.png}" alt="logo" />
+				</div>
+
+				<div>
+				  <p th:if="${param.success}" style="color: green; text-align: center;">
+					<span th:text="${param.success}"></span>	<!--  class="has-success form-control-success" -->
+					<!-- Password has been sent to your email. -->
+					<a href="/login" class="text text-blue">Login.</a>
+				  </p>
+				  <p th:if="${param.error}" style="color: red; text-align: center;">
+				  	<span th:text="${param.error}"></span>	<!-- class="has-danger form-control-danger" -->
+				  </p>
+				</div>
+
+				<div class="form-group">
+				  <!-- <label class="label">Email</label> -->
+				  <div class="input-group">
+					<input type="text" class="form-control" name="email" placeholder="Email" />
+				  </div>
+				</div>
+
+				<div class="form-group">
+				  <button class="btn btn-primary submit-btn btn-block">Sent Password</button>
+				</div>
+
+				<div class="form-group d-flex justify-content-between">
+				</div>
+			  </form>
+			</div>
+
+			<p class="footer-text text-center" style="padding-top: 15px;">
+			  Copyright &#169; 2019 <a href="http://vanhanhmall.com/" target="_blank">Van Hanh Mall</a>. All rights reserved.
+			</p>
+		  </div>
+		</div>
+	  </div> <!-- content-wrapper ends -->
+	</div> <!-- page-body-wrapper ends -->
+  </div> <!-- container-scroller -->
+
+  <script th:src="@{vendors/js/vendor.bundle.base.js}"></script>
+  <script th:src="@{vendors/js/vendor.bundle.addons.js}"></script>
+
+  <script th:src="@{js/template.js}"></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+# ===============================
+# BASIC
+# ===============================
+spring:
+  application:
+    name: barcode-parking
+
+  profiles:
+    active: default
+
+  main:
+    banner-mode: off
+
+  cache:
+    jcache:
+      config: classpath:ehcache.xml
+
+# ===============================
+# THYMELEAF
+# ===============================
+  thymeleaf:
+    cache: true
+    enabled: true
+    prefix: classpath:/templates/
+    suffix: .html
+
+# ===============================
+# CLOUD CONFIG
+# ===============================
+  cloud:
+    config:
+      server:
+        bootstrap: true
+        prefix: config
+#       Set repo for File System:
+#        native:
+#          search-locations: C:/
+#       Set repo for Git:
+        git:
+          search-paths:
+            - configuration
+#            - configuration/{application}
+          clone-on-start: true                # Verify any repository issue in service startup
+          timeout: 10
+#          uri: https://github.com/phongvu2010/properties-config.git
+#          username: phongvu2010
+#          password: HunterDo2010@
+#          uri: git@github.com:phongvu2010/properties-config.git
+          uri: git@github.com:phongvu2010/barcode-parking.git
+          ignore-local-ssh-settings: true
+          strict-host-key-checking: false
+          passphrase: 123456
+          private-key: |
+                        -----BEGIN RSA PRIVATE KEY-----
+                        Proc-Type: 4,ENCRYPTED
+                        DEK-Info: DES-EDE3-CBC,A27A074244811272
+
+                        SJ8xrRQLC81PBBq9mboBkyGKQaWqGHxhDm3s9oPrL2eVL2pvQEDCrzuEnsZXPbjt
+                        FVzII1ToxOg9K3rkUhgIqYmckZrdqz/mk2kkT4mOS+WgOVy1C72O5JWBgidbRfog
+                        xCiehD04LMQs1Lpj/v1ItrDCBOqW/yCSL2dC8wknab6o0urulZ8XHUpOrXapjyYH
+                        EYkPus3kexkAGKuBlPzsYFZkEdVqgBTTzbwsUmPEj01wVQXyoLUHErwfPBwG9ADv
+                        CBjwuR3F0DoLE/R7ydd+ByXlEYVgRw3DkkXT+/fDHLAikv2oNvV1TN0KhKXoKzrj
+                        EikbkYbdUzeONHbu5m6LEmVwZTwK8QSrL29QTfKfhvAt+Gnefr+NgxKRcqVpImRm
+                        61bZLIGuv81iXGILW1CrKGk2YY2PaCseXqnqEc5JNgx/P77HwJUdoBwz3mhgm6jI
+                        Az5+M+IaxIJUQZgzBI4nMxSdYd/BioO8a73AL+KfWkFXgSB+IfWZHzwpL6AQrL0S
+                        48pevS+hWjO5I85FybqM2ZJWdGl6Bp6GIxmvvlkWf5WENt/qzKXxj03d7SnaK3D5
+                        HgHnvPqBpU74sX8VlXxpQQlTDbrfWpVh7o1CoHWdt0a2rG35j7SJcPXMxkqmQPjl
+                        BiKVP7Vw9cMNeHuAN+YENGOnsmERctmP2HGSMUNs0ESZP4dWGbgavXVusVVTAwwQ
+                        nGwuWViT+q3pcoJZ5i/y/l8YVZ0NSDV0D3xYQ1jknhhQJJwjFe2gWVBd0NtKJajj
+                        BsKDC20O9dR6pckjnfkOnQcPqhad+AP3nuGhkhcArOIh1/lURyMcZmnjDrKjDUI7
+                        FWXHLO3jtp12N+nz9KR/tUBL7VlbLAgJ8SlKVeB1a9rf+RstTr+5RLl4KqRKxVtJ
+                        bay26bSmMN8VKBfFFH/K5ZDjm3OzqPWSjDHu6j2uxwEkP3joiIJ/5FtkI7iVpszL
+                        K82iij/YLX644+CM7WEgiZTqiG1+jOD4jMukH0w6CxToxo+2oRti+F7qm0Clvx9e
+                        mQgR8c4eRHOJFy4dy+wt3MRaX4xTFPlybdA5BBFjnhY1ZpJpTxBE390cMRJY9hWj
+                        PSIXUE4DjuEquj0/yCXODLjoV7BXyQN5aNwWD0LtKWLml8OTvt4ymp6nhKVAm2VD
+                        Zm0mCaic3B6aRY+6pM7t8d6DP/g8NxbAaO9MeXkIurFUS7B/TJ5zPI2PIrHBu0NV
+                        KUpNObgqU6wM3DPeAlsq+xli0u4mCo7C9FAaxvw/K525HM4cSbjLiGCYjCIS8amO
+                        jMD7THAiblRo+6CYLs45QmE+IhkW3CtCMaOrN6SWhL68Q8xNsPqaPyUkW4VBV6US
+                        lpt3pnVG9o0TteIHfW241KEIYbCr6ZoSY6wIlUrskh1gnRYoBMJyM+sN4W+8iCAh
+                        cOYY3UKUW1NvTU5QudzizhFcLjESBgmC67QIa5ExM1XXrlPs5c4EGRhWWppQp8tR
+                        jmRt2VzwZlmYo06thoUuDt/vR4OFYsV+jhcJ2p72vxNZGOg59XmwPy82JxiQZJbZ
+                        H8Lab6UR0PwSwiFwvC1TnnYdxmU0bgm+PibthPvXzEzwZ7s+48AbbA==
+                        -----END RSA PRIVATE KEY-----
+
+# ===============================
+# ACTUATOR
+# ===============================
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always

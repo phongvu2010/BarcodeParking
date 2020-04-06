@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:fragment="header-css">
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title th:utext="${title}"></title>
+
+  <link rel="stylesheet" th:href="@{vendors/iconfonts/simple-line-icon/css/simple-line-icons.css}" />
+  <link rel="stylesheet" th:href="@{vendors/iconfonts/font-awesome/css/font-awesome.min.css}" />
+  <link rel="stylesheet" th:href="@{vendors/css/vendor.bundle.base.css}" />
+  <link rel="stylesheet" th:href="@{vendors/css/vendor.bundle.addons.css}" />
+
+  <link rel="stylesheet" th:href="@{css/style.css}" />
+
+  <link rel="shortcut icon" th:href="@{images/favicon.ico}" />
+</head>
+<body>
+  <nav class="navbar horizontal-layout col-lg-12 col-12 p-0" th:fragment="navbar">
+	<div class="nav-top flex-grow-1">
+	  <div class="container d-flex flex-row h-100 align-items-center">
+		<div class="text-center navbar-brand-wrapper d-flex align-items-center">
+		  <a class="navbar-brand brand-logo" href="/"><img th:src="@{images/van-hanh-mall-logo.png}" width="80%" alt="logo" /></a>
+		  <a class="navbar-brand brand-logo-mini" href="/"><img th:src="@{images/logo-mini.svg}" alt="logo"/></a>
+		</div>
+
+		<div class="navbar-menu-wrapper d-flex align-items-center justify-content-between flex-grow-1">
+		  <ul class="navbar-nav navbar-nav-right mr-0 ml-auto">
+			<li class="nav-item nav-profile dropdown">
+			  <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+				<!-- <img src="https://via.placeholder.com/39x39" alt="profile" /> -->
+				<span class="nav-profile-name" th:utext="${#request.userPrincipal.name}"></span>
+			  </a>
+
+			  <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+				<a href="/profile" class="dropdown-item"><i class="icon-settings text-primary mr-2"></i> Setting</a>
+				<div class="dropdown-divider"></div>
+				<a href="/logout" class="dropdown-item"><i class="icon-logout text-primary mr-2"></i> Logout</a>
+			  </div>
+			</li>
+		  </ul>
+
+		  <button class="navbar-toggler align-self-center" type="button" data-toggle="minimize">
+			<!-- <span class="icon-menu text-dark"></span> -->
+			<span class="fa fa-bars text-light"></span>
+		  </button>
+		</div>
+	  </div>
+	</div>
+
+	<div class="nav-bottom">
+	  <div class="container">
+		<ul class="nav page-navigation">
+		  <li class="nav-item">
+			<a href="/" class="nav-link"><i class="fa fa-home"></i> &nbsp; <span class="menu-title">Dashboard</span></a>
+		  </li>
+
+		  <li class="nav-item">
+			<a href="/list-order" class="nav-link"><i class="fa fa-barcode"></i> &nbsp; <span class="menu-title">List Barcode</span></a>
+		  </li>
+
+		  <li class="nav-item">
+			<a href="#" class="nav-link"><i class="link-icon icon-book-open"></i><span class="menu-title">Manage</span><i class="menu-arrow"></i></a>
+			<div class="submenu">
+			  <ul class="submenu-item">
+				<li class="nav-item">
+				  <a href="/manage-code" class="nav-link">Manage Codes</a>
+				</li>
+			  </ul>
+			</div>
+		  </li>
+
+		  <li class="nav-item">
+			<a href="#" class="nav-link"><span class="menu-title"></span></a>
+		  </li>
+
+		  <li class="nav-item">
+			<a href="#" class="nav-link"><span class="menu-title"></span></a>
+		  </li>
+
+		  <li class="nav-item">
+			<a href="#" class="nav-link"><span class="menu-title"></span></a>
+		  </li>
+
+		  <li class="nav-item">
+			<a href="#" class="nav-link"><span class="menu-title"></span></a>
+		  </li>
+
+		  <li class="nav-item">
+			<a href="#" class="nav-link"><span class="menu-title"></span></a>
+		  </li>
+		</ul>
+	  </div>
+	</div>
+  </nav>
+</body>
+</html>
