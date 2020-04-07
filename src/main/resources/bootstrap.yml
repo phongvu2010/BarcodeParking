@@ -9,20 +9,11 @@ spring:
     active: default
 
   main:
-    banner-mode: off
+    banner-mode: console
 
   cache:
     jcache:
       config: classpath:ehcache.xml
-
-# ===============================
-# THYMELEAF
-# ===============================
-  thymeleaf:
-    cache: true
-    enabled: true
-    prefix: classpath:/templates/
-    suffix: .html
 
 # ===============================
 # CLOUD CONFIG
@@ -38,15 +29,13 @@ spring:
 #       Set repo for Git:
         git:
           search-paths:
-            - configuration
-#            - configuration/{application}
+            - configuration/{application}
           clone-on-start: true                # Verify any repository issue in service startup
           timeout: 10
 #          uri: https://github.com/phongvu2010/properties-config.git
 #          username: phongvu2010
 #          password: HunterDo2010@
-#          uri: git@github.com:phongvu2010/properties-config.git
-          uri: git@github.com:phongvu2010/barcode-parking.git
+          uri: git@github.com:phongvu2010/properties-config.git
           ignore-local-ssh-settings: true
           strict-host-key-checking: false
           passphrase: 123456
@@ -81,15 +70,3 @@ spring:
                         jmRt2VzwZlmYo06thoUuDt/vR4OFYsV+jhcJ2p72vxNZGOg59XmwPy82JxiQZJbZ
                         H8Lab6UR0PwSwiFwvC1TnnYdxmU0bgm+PibthPvXzEzwZ7s+48AbbA==
                         -----END RSA PRIVATE KEY-----
-
-# ===============================
-# ACTUATOR
-# ===============================
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    health:
-      show-details: always
