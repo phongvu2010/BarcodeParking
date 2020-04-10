@@ -9,7 +9,7 @@ spring:
     active: default
 
   main:
-    banner-mode: console
+    banner-mode: off
 
   cache:
     jcache:
@@ -23,10 +23,10 @@ spring:
       server:
         bootstrap: true
         prefix: config
-#       Set repo for File System:
+        # Set repo for File System:
 #        native:
 #          search-locations: C:/
-#       Set repo for Git:
+        # Set repo for Git:
         git:
           search-paths:
             - configuration/{application}
