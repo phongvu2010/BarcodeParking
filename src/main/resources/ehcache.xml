@@ -14,9 +14,38 @@
   <!-- The caches we will create -->
   <cache alias='companyCache' uses-template='default-cache' />
   <cache alias='usernameCache' uses-template='default-cache' />
+  <cache alias='codeCache' uses-template='code-cache' />
 
   <!-- The config cache tenplate -->
   <cache-template name='default-cache'>
+	<expiry>
+	  <ttl unit="seconds">900</ttl>
+	</expiry>
+
+	<listeners>
+	  <listener>
+		<!-- The the main cache event listener -->
+		<class>ga.hunterdo.barcodeparking.config.CacheEventLogger</class>
+		<event-firing-mode>ASYNCHRONOUS</event-firing-mode>
+		<event-ordering-mode>UNORDERED</event-ordering-mode>
+		<events-to-fire-on>CREATED</events-to-fire-on>
+		<events-to-fire-on>UPDATED</events-to-fire-on>
+		<events-to-fire-on>EXPIRED</events-to-fire-on>
+		<events-to-fire-on>REMOVED</events-to-fire-on>
+		<events-to-fire-on>EVICTED</events-to-fire-on>
+	  </listener>
+	</listeners>
+
+	<resources>
+	  <heap unit='entries'>10</heap>
+	  <!--
+	  <offheap unit='MB'>10</offheap>
+	  <disk persistent='false' unit='MB'>20</disk>
+	  -->
+	</resources>
+  </cache-template>
+
+  <cache-template name='code-cache'>
 	<expiry>
 	  <ttl unit="seconds">30</ttl>
 	</expiry>
@@ -36,7 +65,7 @@
 	</listeners>
 
 	<resources>
-	  <heap unit='entries'>300</heap>
+	  <heap unit='entries'>500</heap>
 	  <!--
 	  <offheap unit='MB'>10</offheap>
 	  <disk persistent='false' unit='MB'>20</disk>
