@@ -13,6 +13,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.itextpdf.text.BadElementException;
@@ -36,6 +37,9 @@ import ga.hunterdo.barcodeparking.entity.Usernames;
 
 @Service
 public class ExportPdfService {
+	@Value("${application.config.company.code}")
+	private String companyCodeDefault;
+
 	private String imageLogoTenant;
 	private String imageLogoDefault;
 
@@ -54,8 +58,9 @@ public class ExportPdfService {
 
 			String codeCompany = username.getCompany().getCode();
 
-			imageLogoTenant = checkImageExists(context, codeCompany + ".jpg");
-			imageLogoDefault = checkImageExists(context, "van-hanh-mall-logo.png");
+			if (!codeCompany.matches(companyCodeDefault))
+				imageLogoTenant = checkImageExists(context, codeCompany + ".jpg");
+			imageLogoDefault = checkImageExists(context, companyCodeDefault + ".jpg");
 
 			PdfPTable table = new PdfPTable(3);
 			table.setWidthPercentage(100);
@@ -145,7 +150,7 @@ public class ExportPdfService {
 			table.addCell(imageLogo(Image.getInstance(imageLogoTenant)));
 		}
 
-//		table.addCell(imageLogo(Image.getInstance(imageLogoDefault)));
+		table.addCell(imageLogo(Image.getInstance(imageLogoDefault)));
 
 		return table;
 	}
