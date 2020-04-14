@@ -15,6 +15,7 @@
   <cache alias='companyCache' uses-template='default-cache' />
   <cache alias='usernameCache' uses-template='default-cache' />
   <cache alias='codeCache' uses-template='code-cache' />
+  <cache alias='tokenCache' uses-template='default-cache' />
 
   <!-- The config cache tenplate -->
   <cache-template name='default-cache'>

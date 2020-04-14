@@ -22,14 +22,14 @@ public class HandleErrorController implements ErrorController {
 		if (status != null) {
 			Integer statusCode = Integer.valueOf(status.toString());
 			if (statusCode == HttpStatus.NOT_FOUND.value()) {
-				model.addAttribute("title", "Page Not Found | BAC BINH");
+				model.addAttribute("title", "Page Not Found");
 				model.addAttribute("body_title", "404");
 				String mess = "<h2 class=\"text-white\">SORRY!</h2>\r\n" 
 							+ "<h3 class=\"font-weight-light text-white\">The page you’re looking for was not found.</h3>";
 
 				model.addAttribute("body_message", mess);
 			} else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
-				model.addAttribute("title", "Internal Server Error | BAC BINH");
+				model.addAttribute("title", "Internal Server Error");
 				model.addAttribute("body_title", "500");
 				String mess = "<h2 class=\"text-white\">SORRY!</h2>\r\n" 
 							+ "<h3 class=\"font-weight-light text-white\">There is a problem with the resource you are looking for, and it cannot be displayed. Please try again later.</h3>";
@@ -43,7 +43,7 @@ public class HandleErrorController implements ErrorController {
 
 	@GetMapping(value = {"/403"})
 	public String accessDenied(Model model) {
-		model.addAttribute("title", "Access Not Granted | BAC BINH");
+		model.addAttribute("title", "Access Not Granted");
 		model.addAttribute("body_title", "403");
 		String mess	= "<h2 class=\"text-white\">SORRY!</h2>\r\n" 
 					+ "<h3 class=\"font-weight-light text-white\">The server cannot process the request</h3>";

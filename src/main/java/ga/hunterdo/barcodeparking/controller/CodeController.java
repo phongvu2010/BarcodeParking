@@ -46,10 +46,10 @@ public class CodeController {
 	}
 
 	@GetMapping(value = {"/list-order"})
-	public String orderList(Model model, Principal principal) { 
-		model.addAttribute("title", "List Code");
+	public String orderList(Model model, Principal principal) {
 		username = usernameService.findUser(principal.getName());
 
+		model.addAttribute("title", "List Code");
 		model.addAttribute("codeCompany", username.getCompany().getCode());
 		model.addAttribute("listOrder", codeService.listOrder(username));
 
@@ -61,17 +61,18 @@ public class CodeController {
 	}
 
 	@PostMapping(value = {"/add-codes"})
-	public String doAddCodes(@ModelAttribute("code") CodeDTO code, HttpServletRequest request) {
+	public String doAddCodes(@ModelAttribute("code") CodeDTO code, HttpServletRequest request, Principal principal) {
+		username = usernameService.findUser(principal.getName());
 		codeService.addCodes(code.getQtyMoto(), code.getQtyCar(), username);
 
 		return "redirect:/list-order";
 	}
 
 	@GetMapping(value = {"/list-code"})
-	public String codeList(@RequestParam("d") String date, Model model, Principal principal) throws ParseException {  
-		model.addAttribute("title", "List Code");
+	public String codeList(@RequestParam("d") String date, Model model, Principal principal) throws ParseException {
 		username = usernameService.findUser(principal.getName());
 
+		model.addAttribute("title", "List Code");
 		model.addAttribute("listCode", codeService.listCode(date, username));
 
 		return "codesPage";
