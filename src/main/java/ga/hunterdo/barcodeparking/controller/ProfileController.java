@@ -7,11 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-//import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ga.hunterdo.barcodeparking.dto.ProfileDTO;
 import ga.hunterdo.barcodeparking.entity.Usernames;
+import ga.hunterdo.barcodeparking.service.TokenService;
 import ga.hunterdo.barcodeparking.service.UsernameService;
 import ga.hunterdo.barcodeparking.util.ValidateEmail;
 
@@ -19,6 +20,9 @@ import ga.hunterdo.barcodeparking.util.ValidateEmail;
 public class ProfileController {
 	@Autowired
 	private UsernameService usernameService;
+
+	@Autowired
+	private TokenService tokenService;
 
 	private Usernames username;
 
@@ -60,29 +64,29 @@ public class ProfileController {
 		return "forgetPage";
 	}
 
-//	@PostMapping(value = {"/forgot-password"})
-//	public String doForgotPassword(@ModelAttribute("profile") ProfileDTO profile, Model model) {
-//		String email = profile.getEmail();
-//		if (new ValidateEmail().isValid(email)) {
-//			if (tokenService.createToken(email))
-//				model.addAttribute("success", "Email activation sent to you!");
-//			else
-//				model.addAttribute("error", "The email not exist!");
-//		}
-//
-//		return "redirect:/forgot-password";
-//	}
+	@PostMapping(value = {"/forgot-password"})
+	public String doForgotPassword(@ModelAttribute("profile") ProfileDTO profile, Model model) {
+		String email = profile.getEmail();
+		if (new ValidateEmail().isValid(email)) {
+			if (tokenService.createToken(email))
+				model.addAttribute("success", "Email activation sent to you!");
+			else
+				model.addAttribute("error", "The email not exist!");
+		}
 
-//	@GetMapping(value = {"/active"})
-//	public String changeForgotPassword(@RequestParam("token") String tokenID, Model model) {
-//		if (profileDetail.changeFGPassword(profileDetail.loadToken(tokenID))) {
-//			model.addAttribute("success", "Password has been sent to your email!");
-//
-//			return "redirect:/login";
-//		} else {
-//			model.addAttribute("error", "Link expires!");
-//
-//			return "redirect:/forgot-password";
-//		}
-//	}
+		return "redirect:/forgot-password";
+	}
+
+	@GetMapping(value = {"/active"})
+	public String changeForgotPassword(@RequestParam("token") String tokenID, Model model) {
+		if (tokenService.changeFGPassword(tokenService.loadToken(tokenID))) {
+			model.addAttribute("success", "Password has been sent to your email!");
+
+			return "redirect:/login";
+		} else {
+			model.addAttribute("error", "Link expires!");
+
+			return "redirect:/forgot-password";
+		}
+	}
 }

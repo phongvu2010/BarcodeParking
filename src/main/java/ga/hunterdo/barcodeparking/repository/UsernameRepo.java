@@ -1,8 +1,8 @@
 package ga.hunterdo.barcodeparking.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
+//import org.springframework.data.jpa.repository.Modifying;
+//import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import ga.hunterdo.barcodeparking.entity.Usernames;
@@ -13,9 +13,9 @@ public interface UsernameRepo extends JpaRepository<Usernames, String> {
 
 	Usernames findByEmail(String email);
 
-	@Modifying
-	@Query("UPDATE Usernames SET password = ?2 WHERE username = ?1")
-	void changePassword(String userName, String passWord);
+//	@Modifying
+//	@Query("UPDATE Usernames SET password = ?2 WHERE username = ?1")
+//	void changePassword(String userName, String passWord);
 }
 //@Modifying
 //@Query("UPDATE Usernames SET password = ?2 WHERE username = ?1")
