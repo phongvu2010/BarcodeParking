@@ -38,7 +38,7 @@ public class RandomString {
 		this(length, new SecureRandom());
 	}
 
-	// Create session identifiers 1 symbol.
+	// Create session identifiers 8 symbol.
 	public RandomString() {
 		this(8);
 	}
