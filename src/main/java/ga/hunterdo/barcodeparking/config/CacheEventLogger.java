@@ -10,7 +10,10 @@ public class CacheEventLogger implements CacheEventListener<Object, Object> {
 
 	@Override
 	public void onEvent(CacheEvent<?, ?> cacheEvent) {
-		LOG.info("\r\n{} CACHING EVENT (Key: {} - Old value: {} - New value: {})", cacheEvent.getType(), cacheEvent.getKey(),
-				cacheEvent.getOldValue(), cacheEvent.getNewValue());
+		LOG.info("\r\n - {} CACHING EVENT (Key: {} - Old value: {} - New value: {})",
+				cacheEvent.getType(),
+				cacheEvent.getKey(),
+				cacheEvent.getOldValue(),
+				cacheEvent.getNewValue());
 	}
 }
