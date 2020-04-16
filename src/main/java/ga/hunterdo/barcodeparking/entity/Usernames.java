@@ -30,7 +30,6 @@ public class Usernames implements Serializable {
 	private boolean enabled;
 	private Set<Codes> codes = new HashSet<Codes>(0);
 	private Set<Tokens> tokens = new HashSet<Tokens>(0);
-
 /*
 	public Usernames(Object[] object) {
 		this.username = (String) object[0];
@@ -65,7 +64,7 @@ public class Usernames implements Serializable {
 		this.email = email;
 	}
 
-	@Column(name = "role", nullable = false, length = 12)  // Admin, Manager, Account, Tenant
+	@Column(name = "role", nullable = false, length = 12)  // Super, Admin, Manager, Account, Tenant
 	public String getRole() {
 		return role;
 	}

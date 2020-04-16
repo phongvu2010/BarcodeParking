@@ -28,18 +28,6 @@ public class Companies implements Serializable {
 		this.code = code;
 	}
 
-	public Companies (String code, String name) {
-		this.code = code;
-		this.name = name;
-	}
-
-	public Companies (String code, String name, String address, String phone) {
-		this.code = code;
-		this.name = name;
-		this.address = address;
-		this.phone = phone;
-	}
-
 	@Id
 	@Column(name = "code", unique = true, nullable = false, length = 2)
     public String getCode() {

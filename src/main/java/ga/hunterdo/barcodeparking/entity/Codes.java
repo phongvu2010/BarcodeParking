@@ -35,7 +35,7 @@ public class Codes implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)	// , length = 15
+	@Column(name = "id", unique = true, nullable = false)
 	public Integer getID() {
 		return id;
 	}
