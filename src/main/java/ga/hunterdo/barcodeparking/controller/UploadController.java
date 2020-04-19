@@ -30,9 +30,9 @@ public class UploadController {
 		File uploadDir = new File(UPLOAD_DIR);
 		uploadDir.mkdirs();
 
-		String codeCompany = usernameService.findUser(principal.getName()).getCompany().getCode() + ".jpg";
-		String uploadFilePath = UPLOAD_DIR + codeCompany;
-System.out.println(uploadFilePath);
+		String codeCompany = usernameService.findUser(principal.getName()).getCompany().getCode();
+		String uploadFilePath = UPLOAD_DIR + codeCompany + ".jpg";
+
 		try {
 			uploadFile.saveUploadedFiles(uploadFilePath, form.getFiles());
 

@@ -43,7 +43,8 @@ public class InstallController {
 	@GetMapping(value = {"/install"})
 	public String install() {
 		if (usernameService.findUser(userName) == null) {
-			if (companyService.findCompany(companyCode) == null) {
+			company = companyService.findCompany(companyCode);
+			if (company == null) {
 				company = new Companies(companyCode);
 				companyService.save(companyCode, company);
 			}
@@ -55,7 +56,6 @@ public class InstallController {
 			username.setRole(role);
 			username.setCompany(company);
 			username.setEnabled(true);
-
 			usernameService.save(userName, username);
 		}
 

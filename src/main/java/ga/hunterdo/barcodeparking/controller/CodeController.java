@@ -36,6 +36,14 @@ public class CodeController {
 
 	private Usernames username;
 
+	@PostMapping(value = {"/add-codes"})
+	public String doAddCodes(@ModelAttribute("code") CodeDTO code, HttpServletRequest request, Principal principal) {
+		username = usernameService.findUser(principal.getName());
+		codeService.addCodes(code.getQtyMoto(), code.getQtyCar(), username);
+
+		return "redirect:/list-order";
+	}
+
 	@GetMapping(value = {"/image/{id}"})
 	public void imageBarcode(HttpServletResponse response, @PathVariable("id") String id) throws IOException, WriterException {
 		response.setContentType("image/png");
@@ -58,14 +66,6 @@ public class CodeController {
 		model.addAttribute("code", code);
 
 		return "ordersPage";
-	}
-
-	@PostMapping(value = {"/add-codes"})
-	public String doAddCodes(@ModelAttribute("code") CodeDTO code, HttpServletRequest request, Principal principal) {
-		username = usernameService.findUser(principal.getName());
-		codeService.addCodes(code.getQtyMoto(), code.getQtyCar(), username);
-
-		return "redirect:/list-order";
 	}
 
 	@GetMapping(value = {"/list-code"})
