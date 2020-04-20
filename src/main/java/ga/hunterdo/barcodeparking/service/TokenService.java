@@ -59,15 +59,12 @@ public class TokenService {
 
 			return true;
 		}
-	
+
 		return false;
 	}
 
-	public Tokens loadToken(String tokenID) {
-		return tokenRepo.findByToken(tokenID);
-	}
-
-	public boolean changeFGPassword(Tokens token) {
+	public boolean changeFGPassword(String tokenID) {
+		Tokens token = tokenRepo.findByToken(tokenID);
 		if (token.getActivedDate().compareTo(new Date()) >= 0 && !token.isStatus()) {
 			String password = new RandomString().nextString();
 			Usernames username = token.getUsername();
@@ -79,8 +76,7 @@ public class TokenService {
 			String mailSubject = "[VHM] Reset password";
 			String htmlMsg = "<img src='" + domain + "/images/van-hanh-mall-logo.png'>"
 							+ "<br /><br />Dear, <b>" + username.getUsername() + "</b>,"
-							+ "<br /><br />Your password has been changed:"
-							+ "<br />Password: <b>" + password + "</b>"
+							+ "<br /><br />Your password has been changed: <b>" + password + "</b>"
 							+ "<br />Please change the password when logging in successfully! <a href='" + domain + "' target='_blank'>Login here</a>"
 							+ "<br /><br />Best regards!";
 			emailService.sendMessageHtm(username.getEmail(), mailSubject, htmlMsg);

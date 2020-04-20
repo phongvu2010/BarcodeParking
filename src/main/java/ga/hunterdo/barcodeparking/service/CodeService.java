@@ -34,7 +34,7 @@ public class CodeService {
 
 	/* Find Orders */
 	@CacheResult
-	public List<OrderListDTO> listOrder(@CacheKey Usernames username) {
+	public List<OrderListDTO> listOrder(Usernames username) {
 		codeCompany = username.getCompany().getCode();
 
 		List<Object[]> list = codeRepo.countsByCompanyLike(codeCompany);
@@ -64,7 +64,7 @@ public class CodeService {
 	}
 
 	/* Find Codes */
-	@CacheResult	// @CacheKey 
+	@CacheResult 
 	public List<Codes> listCode(@CacheKey String date, Usernames username) throws ParseException {
 		Date d = new SimpleDateFormat("yyMMdd").parse(date);
 		codeCompany = username.getCompany().getCode();
@@ -75,7 +75,7 @@ public class CodeService {
 	}
 
 	/* Find Code */
-	@CacheResult	// @CacheKey 
+	@CacheResult 
 	public Codes getCode(@CacheKey String codeStr) {
 		return codeRepo.findByCode(codeStr);
 	}

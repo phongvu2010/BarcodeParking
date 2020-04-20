@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ga.hunterdo.barcodeparking.dto.ProfileDTO;
-import ga.hunterdo.barcodeparking.service.UploadFile;
+import ga.hunterdo.barcodeparking.service.UploadFileService;
 import ga.hunterdo.barcodeparking.service.UsernameService;
 
 @RestController
@@ -21,7 +21,7 @@ public class UploadController {
 	private UsernameService usernameService;
 
 	@Autowired
-	private UploadFile uploadFile;
+	private UploadFileService uploadService;
 
 	@PostMapping(value = {"/upload-file"})
 	public String multiUploadFileModel(@ModelAttribute ProfileDTO form, HttpServletRequest request, Principal principal) {
@@ -34,7 +34,7 @@ public class UploadController {
 		String uploadFilePath = UPLOAD_DIR + codeCompany + ".jpg";
 
 		try {
-			uploadFile.saveUploadedFiles(uploadFilePath, form.getFiles());
+			uploadService.saveUploadedFiles(uploadFilePath, form.getFiles());
 
 			return "Upload successful!";
 		} catch (IOException e) {

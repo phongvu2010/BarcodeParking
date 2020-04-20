@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class UploadFile {
+public class UploadFileService {
 	// Save Files
 	public String saveUploadedFiles(String uploadFilePath, MultipartFile[] files) throws IOException {
 		StringBuilder sb = new StringBuilder();

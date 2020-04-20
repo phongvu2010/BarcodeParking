@@ -7,7 +7,6 @@ import javax.cache.annotation.CacheResult;
 import javax.cache.annotation.CacheValue;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import ga.hunterdo.barcodeparking.entity.Usernames;
@@ -20,37 +19,16 @@ public class UsernameService {
 	@Autowired
 	private UsernameRepo usernameRepo;
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-
 	@CacheResult
-	public Usernames findUser(String userName) {
-		if (new ValidateEmail().isValid(userName))
-			return usernameRepo.findByEmail(userName);
+	public Usernames findUser(String strUser) {
+		if (new ValidateEmail().isValid(strUser))
+			return usernameRepo.findByEmail(strUser);
 		else
-			return usernameRepo.findByUsername(userName);
+			return usernameRepo.findByUsername(strUser);
 	}
 
 	@CachePut
-	public void save(@CacheKey String strUser, @CacheValue Usernames username) {
-		usernameRepo.save(username);
-	}
-
-	public boolean changePassword(String userName, String oldPass, String newPass) {
-		Usernames username = findUser(userName);
-		if (passwordEncoder.matches(oldPass, username.getPassword())) {
-			username.setPassword(passwordEncoder.encode(newPass));
-			updatePassword(userName, username);
-//			usernameRepo.changePassword(userName, username.getPassword()); 
-
-			return true;
-		}
-
-		return false;
-	}
-
-	@CachePut
-	private void updatePassword(@CacheKey String userName, @CacheValue Usernames username) {
+	public void save(@CacheKey String userName, @CacheValue Usernames username) {
 		usernameRepo.save(username);
 	}
 }

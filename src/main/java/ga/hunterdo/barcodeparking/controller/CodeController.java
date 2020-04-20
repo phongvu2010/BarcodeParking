@@ -45,12 +45,16 @@ public class CodeController {
 	}
 
 	@GetMapping(value = {"/image/{id}"})
-	public void imageBarcode(HttpServletResponse response, @PathVariable("id") String id) throws IOException, WriterException {
-		response.setContentType("image/png");
-		OutputStream outputStream = response.getOutputStream();
-		outputStream.write(ZXingHelper.getBarCodeImage(id, 100, 50));
-		outputStream.flush();
-		outputStream.close();
+	public void imageBarcode(HttpServletResponse response, @PathVariable("id") String id) {
+		try {
+			response.setContentType("image/png");
+			OutputStream outputStream = response.getOutputStream();
+			outputStream.write(ZXingHelper.getBarCodeImage(id, 100, 50));
+			outputStream.flush();
+			outputStream.close();
+		} catch (IOException | WriterException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@GetMapping(value = {"/list-order"})
@@ -69,11 +73,15 @@ public class CodeController {
 	}
 
 	@GetMapping(value = {"/list-code"})
-	public String codeList(@RequestParam("d") String date, Model model, Principal principal) throws ParseException {
+	public String codeList(@RequestParam("d") String date, Model model, Principal principal) {
 		username = usernameService.findUser(principal.getName());
 
 		model.addAttribute("title", "List Code");
-		model.addAttribute("listCode", codeService.listCode(date, username));
+		try {
+			model.addAttribute("listCode", codeService.listCode(date, username));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 
 		return "codesPage";
 	}

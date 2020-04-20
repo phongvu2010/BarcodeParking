@@ -3,6 +3,7 @@ package ga.hunterdo.barcodeparking.controller;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,9 @@ public class ProfileController {
 
 	@Autowired
 	private TokenService tokenService;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	private Usernames username;
 
@@ -47,9 +51,13 @@ public class ProfileController {
 		String newPassword = profile.getNewPass();
 
 		if (!oldPassword.equals(newPassword)) {
-			if (usernameService.changePassword(principal.getName(), oldPassword, newPassword))
+			Usernames username = usernameService.findUser(principal.getName());
+			if (passwordEncoder.matches(oldPassword, username.getPassword())) {
+				username.setPassword(passwordEncoder.encode(newPassword));
+				usernameService.save(principal.getName(), username);
+
 				return "redirect:/";
-			else
+			} else
 				model.addAttribute("error", "Incorrect password");
 		} else
 			model.addAttribute("error", "The same old password");
@@ -79,7 +87,7 @@ public class ProfileController {
 
 	@GetMapping(value = {"/active"})
 	public String changeForgotPassword(@RequestParam("token") String tokenID, Model model) {
-		if (tokenService.changeFGPassword(tokenService.loadToken(tokenID))) {
+		if (tokenService.changeFGPassword(tokenID)) {
 			model.addAttribute("success", "Password has been sent to your email!");
 
 			return "redirect:/login";
