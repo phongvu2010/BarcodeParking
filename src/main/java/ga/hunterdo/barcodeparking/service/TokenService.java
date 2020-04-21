@@ -49,7 +49,7 @@ public class TokenService {
 
 			String mailSubject = "[VHM] Forget password";
 			String htmlMsg = "<img src='" + domain + "/images/van-hanh-mall-logo.png'>"
-							+ "<br /><br />Dear, <b>" + username.getUsername() + "</b>,"
+							+ "<br /><br />Dear, <b>" + username.getUsername() + "</b>"
 							+ "<br /><br />We received a request to forget your password. Click the link below to retrieve your password"
 							+ "<br /><a href='" + domain + "/active?token=" + tokenID + "' target='_blank'>Click here</a>"
 							+ "<br /><br />Best regards!";
@@ -75,7 +75,7 @@ public class TokenService {
 
 			String mailSubject = "[VHM] Reset password";
 			String htmlMsg = "<img src='" + domain + "/images/van-hanh-mall-logo.png'>"
-							+ "<br /><br />Dear, <b>" + username.getUsername() + "</b>,"
+							+ "<br /><br />Dear, <b>" + username.getUsername() + "</b>"
 							+ "<br /><br />Your password has been changed: <b>" + password + "</b>"
 							+ "<br />Please change the password when logging in successfully! <a href='" + domain + "' target='_blank'>Login here</a>"
 							+ "<br /><br />Best regards!";
