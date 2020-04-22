@@ -145,12 +145,14 @@ public class ExportPdfService {
 
 	private PdfPTable top2Logo() throws BadElementException, MalformedURLException, IOException {
 		PdfPTable table = new PdfPTable(1);
-		if (imageLogoTenant != null) {
-			table = new PdfPTable(2);
-			table.addCell(imageLogo(Image.getInstance(imageLogoTenant)));
-		}
+		if (imageLogoDefault != null) {
+			if (imageLogoTenant != null) {
+				table = new PdfPTable(2);
+				table.addCell(imageLogo(Image.getInstance(imageLogoTenant)));
+			}
 
-		table.addCell(imageLogo(Image.getInstance(imageLogoDefault)));
+			table.addCell(imageLogo(Image.getInstance(imageLogoDefault)));
+		}
 
 		return table;
 	}

@@ -11,16 +11,15 @@ import org.springframework.stereotype.Service;
 import ga.hunterdo.barcodeparking.entity.Tokens;
 import ga.hunterdo.barcodeparking.entity.Usernames;
 import ga.hunterdo.barcodeparking.repository.TokenRepo;
-import ga.hunterdo.barcodeparking.repository.UsernameRepo;
 import ga.hunterdo.barcodeparking.util.RandomString;
 
 @Service
 public class TokenService {
 	@Autowired
-	private UsernameRepo usernameRepo;
+	private TokenRepo tokenRepo;
 
 	@Autowired
-	private TokenRepo tokenRepo;
+	private UsernameService usernameService;
 
 	@Autowired
 	private EmailService emailService;
@@ -32,7 +31,7 @@ public class TokenService {
 	private String domain;
 
 	public boolean createToken(String email) {
-		Usernames username = usernameRepo.findByEmail(email);
+		Usernames username = usernameService.findUser(email);
 		if (username != null) {
 			String tokenID = new RandomString(60).nextString();
 			Calendar cal = Calendar.getInstance();
@@ -81,7 +80,7 @@ public class TokenService {
 							+ "<br /><br />Best regards!";
 			emailService.sendMessageHtm(username.getEmail(), mailSubject, htmlMsg);
 
-			usernameRepo.save(username);
+			usernameService.save(username.getUsername(), username);
 			tokenRepo.save(token);
 
 			return true;
