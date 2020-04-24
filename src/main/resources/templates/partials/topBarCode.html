@@ -94,7 +94,7 @@
 					<td>1</td>
 					<td>Barcode Moto</td>
 					<td class="form-group">
-					  <input th:field="*{qtyMoto}" class="form-control text-center" style="border-bottom: 1px solid #DDDDDD;" data-inputmask="'alias': 'integer'" required />
+					  <input type="number" min ="0" max="1500" class="form-control text-center" style="border-bottom: 1px solid #DDDDDD;" th:field="*{qtyMoto}" required />	<!-- data-inputmask="'alias': 'integer'" -->
 					</td>
 				  </tr>
 
@@ -102,7 +102,7 @@
 					<td>2</td>
 					<td>Barcode Car</td>
 					<td class="form-group">
-					  <input th:field="*{qtyCar}" class="form-control text-center" style="border-bottom: 1px solid #DDDDDD;" data-inputmask="'alias': 'integer'" required />
+					  <input type="number" min ="0" max="1500" class="form-control text-center" style="border-bottom: 1px solid #DDDDDD;" th:field="*{qtyCar}" required />	<!-- data-inputmask="'alias': 'integer'" -->
 					</td>
 				  </tr>
 				</tbody>
