@@ -62,7 +62,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 			// Cấu hình Remember Me
 			.rememberMe()
-				.tokenRepository(this.persistentTokenRepository("InMemoryToken"))
+				.tokenRepository(this.persistentTokenRepository("InMemoryToken"))	// JdbcToken, InMemoryToken
 				.tokenValiditySeconds(1 * 24 * 60 * 60)	// 24h
 				.and()
 			// Khi người dùng đã login, với vai trò XX, nhưng truy cập vào trang yêu cầu vai trò YY,
