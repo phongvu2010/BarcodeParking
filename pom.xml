@@ -7,7 +7,7 @@
 	<version>1.1</version>
 	<packaging>war</packaging>
 
-	<name>barcode-parking</name>
+	<name>Barcode Parking</name>
 	<description>Management Barcode Parking for CYB</description>
 
 	<parent>
